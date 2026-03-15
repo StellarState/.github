@@ -45,13 +45,13 @@ This project adheres to a [Code of Conduct](./CODE_OF_CONDUCT.md). By participat
 
 2. **Clone your fork**:
 ```bash
-   git clone https://github.com/YOUR-USERNAME/stellarsettle-contracts.git
-   cd stellarsettle-contracts
+   git clone https://github.com/YOUR-USERNAME/SS-contracts.git
+   cd SS-contracts
 ```
 
 3. **Add upstream remote**:
 ```bash
-   git remote add upstream https://github.com/stellarsettle/stellarsettle-contracts.git
+   git remote add upstream https://github.com/StellarState/SS-contracts.git
 ```
 
 4. **Follow the setup guide** in [DEVELOPMENT.md](./DEVELOPMENT.md) for the specific repo

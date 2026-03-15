@@ -144,8 +144,8 @@ curl http://localhost:3000/health
 ### 3. Frontend App (stellarsettle-app)
 ```bash
 # Clone the repository
-git clone https://github.com/stellarsettle/stellarsettle-app.git
-cd stellarsettle-app
+git clone https://github.com/StellarState/SS-frontend
+cd SS-frontend
 
 # Install dependencies
 npm install
