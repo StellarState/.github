@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/logo.png" alt="StellarSettle Logo" width="200"/>
+  <img src="../assets/logo.png" alt="StellarSettle Logo" width="200"/>
   
   # StellarSettle
   
@@ -47,9 +47,9 @@ This project is organized into 3 main repositories:
 
 | Repository | Description | Tech Stack |
 |------------|-------------|------------|
-| [stellarsettle-contracts](https://github.com/stellarsettle/stellarsettle-contracts) | Soroban smart contracts for escrow, tokenization, and settlement | Rust, Soroban SDK |
-| [stellarsettle-api](https://github.com/stellarsettle/stellarsettle-api) | Backend API for invoice management and Stellar integration | Node.js 22, TypeScript, Prisma, Express 5 |
-| [stellarsettle-app](https://github.com/stellarsettle/stellarsettle-app) | Web application for sellers and investors | Next.js 15, React 19, TailwindCSS 4 |
+| [stellarsettle-contracts](https://github.com/StellarState/SS-contracts) | Soroban smart contracts for escrow, tokenization, and settlement | Rust, Soroban SDK |
+| [stellarsettle-api](https://github.com/StellarState/SS-backend) | Backend API for invoice management and Stellar integration | Node.js 22, TypeScript, Prisma, Express 5 |
+| [stellarsettle-app](https://github.com/StellarState/SS-frontend) | Web application for sellers and investors | Next.js 15, React 19, TailwindCSS 4 |
 
 ## 🚀 Quick Start for Contributors
 
@@ -75,7 +75,7 @@ This project is organized into 3 main repositories:
 3. **Set up your environment**:
 ```bash
    # Clone the repo you want to work on
-   git clone https://github.com/stellarsettle/stellarsettle-contracts.git
+   git clone https://github.com/StellarState/SS-contracts.git
    cd stellarsettle-contracts
    
    # Follow setup instructions in DEVELOPMENT.md
