@@ -22,16 +22,16 @@ const REPOS = {
 };
 
 async function run() {
-  const ghToken = process.env.GITHUB_TOKEN;
-  const tgToken = process.env.TELEGRAM_BOT_TOKEN;
-  const tgChat  = process.env.TELEGRAM_CHAT_ID;
+  const ghTokenAL = process.env.GITHUB_TOKEN_ACCESSLAYER;
+  const ghTokenSS = process.env.GITHUB_TOKEN_STELLARSTATE;
+  const tgToken   = process.env.TELEGRAM_BOT_TOKEN;
+  const tgChat    = process.env.TELEGRAM_CHAT_ID;
 
-  if (!ghToken) {
-    console.error('[monitor] GITHUB_TOKEN is required');
-    process.exit(1);
-  }
+  if (!ghTokenAL) { console.error('[monitor] GITHUB_TOKEN_ACCESSLAYER is required'); process.exit(1); }
+  if (!ghTokenSS) { console.error('[monitor] GITHUB_TOKEN_STELLARSTATE is required'); process.exit(1); }
 
-  const octokit = createClient(ghToken);
+  const octokitAL = createClient(ghTokenAL);
+  const octokitSS = createClient(ghTokenSS);
   const state   = loadState(STATE_FILE);
   const log     = (msg) => console.log(`[${new Date().toISOString()}] ${msg}`);
 
@@ -40,7 +40,7 @@ async function run() {
     log(`scanning ${owner}/${repo}`);
     let prs;
     try {
-      prs = await listOpenPRs(octokit, owner, repo);
+      prs = await listOpenPRs(octokitAL, owner, repo);
     } catch (err) {
       log(`ERROR listing PRs for ${owner}/${repo}: ${err.message}`);
       continue;
@@ -52,9 +52,9 @@ async function run() {
     for (const pr of prs) {
       try {
         await processAccessLayerPR(pr, {
-          getDiff:        (n) => getPRDiff(octokit, owner, repo, n),
-          getMergeability:(n) => getMergeability(octokit, owner, repo, n),
-          getCIStatus:    (sha) => getCIStatus(octokit, owner, repo, sha),
+          getDiff:        (n) => getPRDiff(octokitAL, owner, repo, n),
+          getMergeability:(n) => getMergeability(octokitAL, owner, repo, n),
+          getCIStatus:    (sha) => getCIStatus(octokitAL, owner, repo, sha),
           sendMessage:    (text) => sendTelegram(tgToken, tgChat, text),
           log,
         }, state, repoKey);
@@ -69,7 +69,7 @@ async function run() {
     log(`scanning ${owner}/${repo}`);
     let prs;
     try {
-      prs = await listOpenPRs(octokit, owner, repo);
+      prs = await listOpenPRs(octokitSS, owner, repo);
     } catch (err) {
       log(`ERROR listing PRs for ${owner}/${repo}: ${err.message}`);
       continue;
@@ -81,8 +81,8 @@ async function run() {
     for (const pr of prs) {
       try {
         await processStellarStatePR(pr, {
-          getDiff:        (n) => getPRDiff(octokit, owner, repo, n),
-          getMergeability:(n) => getMergeability(octokit, owner, repo, n),
+          getDiff:        (n) => getPRDiff(octokitSS, owner, repo, n),
+          getMergeability:(n) => getMergeability(octokitSS, owner, repo, n),
           sendMessage:    (text) => sendTelegram(tgToken, tgChat, text),
           log,
         }, state, repoKey);
