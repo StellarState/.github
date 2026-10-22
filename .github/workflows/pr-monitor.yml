@@ -17,7 +17,7 @@ jobs:
       - name: Checkout monitor repo
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_MONITOR_TOKEN }}
+          token: ${{ secrets.GH_TOKEN_STELLARSTATE }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,7 +33,8 @@ jobs:
       - name: Run monitor
         working-directory: pr-monitor
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_MONITOR_TOKEN }}
+          GITHUB_TOKEN_ACCESSLAYER: ${{ secrets.GH_TOKEN_ACCESSLAYER }}
+          GITHUB_TOKEN_STELLARSTATE: ${{ secrets.GH_TOKEN_STELLARSTATE }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: node src/index.js
@@ -45,3 +46,5 @@ jobs:
           git add pr-monitor/state.json
           git diff --cached --quiet || git commit -m "chore: update pr-monitor state [skip ci]"
           git push
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN_STELLARSTATE }}
